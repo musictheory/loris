@@ -1,4 +1,4 @@
-### musictheory.net changes
+# musictheory.net changes
 
 This is a fork of the last public release (1.8) of [Loris](http://cerlsoundgroup.org/Loris/)
 with select changes for Python 3 compatibility.
@@ -14,7 +14,7 @@ make
 sudo make install
 ```
 
-### Original README
+# Original README
 
 ## Welcome to Loris.
 
