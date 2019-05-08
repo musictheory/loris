@@ -5,17 +5,18 @@ with select changes for Python 3 compatibility.
 
 ## Installation on macOS
 
-1. `git clone https://github.com/musictheory/loris.git`
-2. `cd loris`
-3. `export PYTHON=/Library/Frameworks/Python.framework/Versions/3.7/bin/python3.7`
-4. `./configure --exec_prefix=/Library/Frameworks/Python.framework/Versions/3.7 CPPFLAGS=-I/Library/Frameworks/Python.framework/Versions/3.7/include/python3.7m`
-5. `make`
-6. `sudo make install`
-
+```
+git clone https://github.com/musictheory/loris.git
+cd loris
+export PYTHON=/Library/Frameworks/Python.framework/Versions/3.7/bin/python3.7
+./configure --exec_prefix=/Library/Frameworks/Python.framework/Versions/3.7 CPPFLAGS=-I/Library/Frameworks/Python.framework/Versions/3.7/include/python3.7m
+make
+sudo make install
+```
 
 ### Original README
 
-Welcome to Loris.
+## Welcome to Loris.
 
 Loris is an open source C++ class library implementing analysis,
 manipulation, and synthesis of digitized sounds using the Reassigned
@@ -35,7 +36,7 @@ For documentation, please see the files in the doc subdirectory.
 For a list of major changes to Loris, organized by release number,
 please see the file NEWS.
 
-INSTALLATION: 
+## INSTALLATION: 
 
 For generic configuration and installation instructions, see
 the file INSTALL.
@@ -53,7 +54,7 @@ is covered by its own license and copyright, and is entirely separate
 from Loris. FFTW is not required to build or use Loris.
 
 
-MacOS INSTALLATION:
+## MacOS INSTALLATION:
 
 Loris can be built using the standard GNU tools from a Terminal window
 under Mac OS X (Darwin), follow the instructions for the standard
@@ -67,7 +68,7 @@ to explicitly enable dynamic linking when building FFTW so that the
 dynamic (shared) library is built.
 
 
-COPYRIGHT AND LICENSE:
+## COPYRIGHT AND LICENSE:
 
 Loris is Copyright (c) 1999-2010 by Kelly Fitz and Lippold Haken
 
