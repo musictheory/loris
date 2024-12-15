@@ -5,13 +5,48 @@ with select changes for Python 3 compatibility.
 
 ## Installation on macOS
 
+Use the following instructions to build on macOS Sonoma with the Xcode-provided `python3`.
+
+### Building SWIG
+
+1. Download swig from [https://www.swig.org/download.html](https://www.swig.org/download.html).
+2. Download the latest pcre2 `.tar.gz` from [https://github.com/PCRE2Project/pcre2/releases](https://github.com/PCRE2Project/pcre2/releases).
+3. `gunzip` the pcre2 `.tar.gz`, then place the tar in the swig directory.
+4. Go into the swig directory and run `./Tools/pcre-build.sh`
+5. Run `./configure --with-swiglibdir=$PWD/Lib`
+6. Run `make`
+
+### Building Loris
+
 ```
-git clone https://github.com/musictheory/loris.git
 cd loris
-export PYTHON=/Library/Frameworks/Python.framework/Versions/3.7/bin/python3.7
-./configure --exec_prefix=/Library/Frameworks/Python.framework/Versions/3.7 CPPFLAGS=-I/Library/Frameworks/Python.framework/Versions/3.7/include/python3.7m
+
+# Change this to your built swig
+export SWIG=$(realpath "../swig-4.3.0/swig")
+
+export XCODEDEV=$(xcode-select --print-path)
+export PYTHON=$(readlink -f "$XCODEDEV/usr/bin/python3")
+export MY_SITE_PACKAGES=$($PYTHON -m site --user-site)
+
+./configure CPPFLAGS=-I"$(dirname $PYTHON)/../Headers"
+
 make
-sudo make install
+
+# ---------------------------------------------------------------------
+# Fixup dyld paths
+
+install_name_tool -id "libloris.dylib" src/.libs/libloris.13.dylib
+
+install_name_tool -change \
+    "/usr/local/lib/libloris.13.dylib" \
+    "@loader_path/libloris.dylib" \
+    scripting/.libs/_loris.so
+
+# ---------------------------------------------------------------------
+# Manually copy results into user "site-packages" directory
+
+cp src/.libs/libloris.13.dylib $MY_SITE_PACKAGES/libloris.dylib
+cp scripting/.libs/_loris.so scripting/loris.py $MY_SITE_PACKAGES
 ```
 
 # Original README
